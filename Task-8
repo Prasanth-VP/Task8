@@ -1,0 +1,112 @@
+Index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" readonly>
+    <div class="buttons">
+      <button class="number" id="btn-1">1</button>
+      <button class="number" id="btn-2">2</button>
+      <button class="number" id="btn-3">3</button>
+      <button class="operator" id="btn-plus">+</button>
+      <button class="number" id="btn-4">4</button>
+      <button class="number" id="btn-5">5</button>
+      <button class="number" id="btn-6">6</button>
+      <button class="operator" id="btn-minus">-</button>
+      <button class="number" id="btn-7">7</button>
+      <button class="number" id="btn-8">8</button>
+      <button class="number" id="btn-9">9</button>
+      <button class="operator" id="btn-multiply">*</button>
+      <button class="number" id="btn-0">0</button>
+      <button class="clear" id="btn-clear">C</button>
+      <button class="equals" id="btn-equals">=</button>
+      <button class="operator" id="btn-divide">/</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
+style.css
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .calculator {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  #display {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 1.5rem;
+  }
+  
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  
+  button {
+    padding: 10px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .number {
+    background-color: #e0e0e0;
+  }
+  
+  .operator, .clear, .equals {
+    background-color: #ff9800;
+    color: #fff;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+
+script.js
+document.addEventListener("DOMContentLoaded", function() {
+    const display = document.getElementById("display");
+    const buttons = document.querySelectorAll(".number, .operator, .clear, .equals");
+  
+    buttons.forEach(button => {
+      button.addEventListener("click", function() {
+        const value = this.textContent;
+        if (value === "=") {
+          try {
+            display.value = eval(display.value);
+          } catch (error) {
+            display.value = "Error";
+          }
+        } else if (value === "C") {
+          display.value = "";
+        } else {
+          display.value += value;
+        }
+      });
+    });
+  });
+  
